@@ -12,7 +12,6 @@ public class User {
 
     private static int countId = 0;
 
-
     private int id;
     @Email(message = "Email not valid")
     private String email;

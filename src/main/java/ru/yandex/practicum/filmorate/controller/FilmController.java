@@ -29,7 +29,7 @@ public class FilmController {
     public Film create(@Valid @RequestBody Film film) {
         log.info("Получен POST запрос к эндпоинту: /films, Строка параметров запроса: '{}'",
                 film);
-        film.setId(Film.generateId());
+        film.setId(film.generateId());
         films.put(film.getId(), film);
         return film;
     }

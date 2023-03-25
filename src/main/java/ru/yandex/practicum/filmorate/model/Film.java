@@ -15,19 +15,19 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Film {
 
-    private static int countId = 0;
+    private int countId = 0;
 
     private int id;
     @NotBlank(message = "Name not valid")
     private String name;
-    @Size(max=200, message = "Description not valid")
+    @Size(max = 200, message = "Description not valid")
     private String description;
     @DataConstraint(message = "ReleaseDate not valid")
     private LocalDate releaseDate;
     @Min(0)
-    private int duration;
+    private long duration;
 
-    public static int generateId() {
+    public int generateId() {
         return ++countId;
     }
 }
