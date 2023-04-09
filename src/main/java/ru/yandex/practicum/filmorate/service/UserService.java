@@ -30,7 +30,7 @@ public class UserService {
                 HashSet<String> tempHashSet = new HashSet<>();
                 tempHashSet.add(users.get(idUser).getLogin());
                 users.get(idFriendUser).setFriends(tempHashSet);
-         } else {
+            } else {
                 users.get(idFriendUser).getFriends()
                         .add(users.get(idUser).getLogin());
             }
@@ -57,7 +57,7 @@ public class UserService {
         }
     }
 
-   public List<User> findFriend(int idUser, InMemoryUserStorage inMemoryUserStorage) {
+    public List<User> findFriend(int idUser, InMemoryUserStorage inMemoryUserStorage) {
         Map<Integer, User> users = inMemoryUserStorage.getUsers();
         List<String> listFriends = new ArrayList<>(inMemoryUserStorage.getUsers().get(idUser).getFriends());
         List<User> userListFriends = users.values().stream()
@@ -66,7 +66,7 @@ public class UserService {
 
     }
 
-   public List<User> findCommonFriend(int idUser, int idFriendUser, InMemoryUserStorage inMemoryUserStorage) {
+    public List<User> findCommonFriend(int idUser, int idFriendUser, InMemoryUserStorage inMemoryUserStorage) {
         Map<Integer, User> users = inMemoryUserStorage.getUsers();
         if (users.containsKey(idUser) &&
                 users.containsKey(idFriendUser)) {

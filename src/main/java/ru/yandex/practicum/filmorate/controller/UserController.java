@@ -24,7 +24,7 @@ public class UserController {
     private final UserService userService;
 
     @Autowired
-    public UserController(InMemoryUserStorage inMemoryUserStorage, UserService userService){
+    public UserController(InMemoryUserStorage inMemoryUserStorage, UserService userService) {
         this.inMemoryUserStorage = inMemoryUserStorage;
         this.userService = userService;
     }
@@ -48,9 +48,9 @@ public class UserController {
     public User putUser(@RequestBody User user) {
         log.info("Получен PUT запрос к эндпоинту: /users, Строка параметров запроса: '{}'",
                 user);
-        if (inMemoryUserStorage.putUser(user) == null){
-                throw new IncorrectException("Не найден User c id " + user.getId());
-            }
+        if (inMemoryUserStorage.putUser(user) == null) {
+            throw new IncorrectException("Не найден User c id " + user.getId());
+        }
         return inMemoryUserStorage.putUser(user);
 
     }
@@ -86,7 +86,7 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     public User findUser(@PathVariable int id) {
-        if (inMemoryUserStorage.getUsers().get(id) == null){
+        if (inMemoryUserStorage.getUsers().get(id) == null) {
             throw new ExceptionNotFound("Не найден User c id " + id);
         }
         return userService.findUser(id, inMemoryUserStorage);

@@ -51,14 +51,14 @@ public class FilmController {
 //        if (!inMemoryFilmStorage.getFilms().containsKey(film.getId())){
 //            throw new ExceptionNotFound(String.format("Не найден Film c id %s", film.getId()));
 //        }
-       return inMemoryFilmStorage.putFilm(film);
+        return inMemoryFilmStorage.putFilm(film);
     }
 
     @PutMapping("films/{id}/like/{userId}")
     public Film addLike(@PathVariable int id, @PathVariable int userId) {
         log.info("Получен PUT запрос к эндпоинту: films/{id}/like/{userId}, Строка параметров запроса: '{}' , '{}'",
                 id, userId);
-       return filmService.addLike(id, userId, inMemoryFilmStorage, inMemoryUserStorage);
+        return filmService.addLike(id, userId, inMemoryFilmStorage, inMemoryUserStorage);
     }
 
     @DeleteMapping("/films/{id}/like/{userId}")
