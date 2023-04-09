@@ -9,13 +9,10 @@ import ru.yandex.practicum.filmorate.exeption.ExceptionNotFound;
 import ru.yandex.practicum.filmorate.inMemory.InMemoryFilmStorage;
 import ru.yandex.practicum.filmorate.inMemory.InMemoryUserStorage;
 import ru.yandex.practicum.filmorate.model.Film;
-import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.service.FilmService;
-import ru.yandex.practicum.filmorate.service.UserService;
 
 import javax.validation.Valid;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 @Slf4j
