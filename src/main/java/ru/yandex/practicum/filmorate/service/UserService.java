@@ -92,7 +92,7 @@ public class UserService {
         return inMemoryUserStorage.getUsers().get(id);
     }
 
-    public Collection<User> findAll(){
+    public Collection<User> findAll() {
         return inMemoryUserStorage.findAll();
     }
 
