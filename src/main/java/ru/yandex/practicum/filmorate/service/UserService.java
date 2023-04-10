@@ -1,5 +1,6 @@
 package ru.yandex.practicum.filmorate.service;
 
+import lombok.Getter;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.inMemory.InMemoryUserStorage;
 import ru.yandex.practicum.filmorate.model.User;
@@ -10,8 +11,11 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
 
+    @Getter
+    InMemoryUserStorage inMemoryUserStorage = new InMemoryUserStorage();
+
     //добавление в друзья
-    public void addFriend(int idUser, int idFriendUser, InMemoryUserStorage inMemoryUserStorage) {
+    public void addFriend(int idUser, int idFriendUser) {
         Map<Integer, User> users = inMemoryUserStorage.getUsers();
 
         if (users.containsKey(idUser) &&
@@ -37,7 +41,7 @@ public class UserService {
         }
     }
 
-    public void deleteFriend(int idUser, int idFriendUser, InMemoryUserStorage inMemoryUserStorage) {
+    public void deleteFriend(int idUser, int idFriendUser) {
         Map<Integer, User> users = inMemoryUserStorage.getUsers();
 
         if (users.containsKey(idUser) &&
@@ -57,7 +61,7 @@ public class UserService {
         }
     }
 
-    public List<User> findFriend(int idUser, InMemoryUserStorage inMemoryUserStorage) {
+    public List<User> findFriend(int idUser) {
         Map<Integer, User> users = inMemoryUserStorage.getUsers();
         List<String> listFriends = new ArrayList<>(inMemoryUserStorage.getUsers().get(idUser).getFriends());
         List<User> userListFriends = users.values().stream()
@@ -66,7 +70,7 @@ public class UserService {
 
     }
 
-    public List<User> findCommonFriend(int idUser, int idFriendUser, InMemoryUserStorage inMemoryUserStorage) {
+    public List<User> findCommonFriend(int idUser, int idFriendUser) {
         Map<Integer, User> users = inMemoryUserStorage.getUsers();
         if (users.containsKey(idUser) &&
                 users.containsKey(idFriendUser)) {
@@ -84,7 +88,19 @@ public class UserService {
         return new ArrayList<>();
     }
 
-    public User findUser(int id, InMemoryUserStorage inMemoryUserStorage) {
+    public User findUser(int id) {
         return inMemoryUserStorage.getUsers().get(id);
+    }
+
+    public Collection<User> findAll(){
+        return inMemoryUserStorage.findAll();
+    }
+
+    public User createUser(User user) {
+        return inMemoryUserStorage.createUser(user);
+    }
+
+    public User putUser(User user) {
+        return inMemoryUserStorage.putUser(user);
     }
 }

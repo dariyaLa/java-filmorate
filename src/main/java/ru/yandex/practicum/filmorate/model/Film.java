@@ -14,7 +14,7 @@ import java.util.HashSet;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Film implements Comparable<Film> {
+public class Film {
 
     private static int countId = 0;
 
@@ -33,32 +33,4 @@ public class Film implements Comparable<Film> {
         return ++countId;
     }
 
-    @Override
-    public int compareTo(Film o) {
-        if (this.likes == null && o.getLikes() == null) {
-            if (this.id < o.getId()) {
-                return -1;
-            }
-            return 1;
-        }
-        if (this.likes.isEmpty() && o.getLikes() == null) {
-            if (this.id < o.getId()) {
-                return -1;
-            }
-            return 1;
-        }
-        if (this.likes == null && o.getLikes().isEmpty()) {
-            if (this.id < o.getId()) {
-                return -1;
-            }
-            return 1;
-        }
-        if (this.likes == null && !o.getLikes().isEmpty()) {
-            return 1;
-        }
-        if (!this.likes.isEmpty() && o.getLikes() == null) {
-            return -1;
-        }
-        return this.likes.size() - o.getLikes().size();
-    }
 }
