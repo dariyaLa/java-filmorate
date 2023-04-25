@@ -2,7 +2,7 @@
 Template repository for Filmorate project.
 
 # scheme-database-filmorate
-![img_1.png](scheme_database.png)
+![scheme-database.png](scheme-database.png)
 - users - хранит польвателей,
 - follows - хранит дружеские связа пользователей, поле 
     status может принимать значение [false,true], где true-confirmed, в случае
@@ -15,4 +15,5 @@ Template repository for Filmorate project.
   R — лицам до 17 лет просматривать фильм можно только в присутствии взрослого,
   NC-17 — лицам до 18 лет просмотр запрещён.
 - genre - хранит жанры фильмов,
-- likes_film - хранит лайки польвателей к фильму
+- likes_film - хранит лайки польвателей к фильму,
+- films_genres - хранит жанры фильмов
