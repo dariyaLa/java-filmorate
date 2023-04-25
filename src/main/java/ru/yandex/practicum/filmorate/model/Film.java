@@ -8,6 +8,7 @@ import ru.yandex.practicum.filmorate.validator.DataConstraint;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 
 @Data
 @Builder
@@ -15,7 +16,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Film {
 
-    private int countId = 0;
+    private static int countId = 0;
 
     private int id;
     @NotBlank(message = "Name not valid")
@@ -26,8 +27,10 @@ public class Film {
     private LocalDate releaseDate;
     @Min(0)
     private long duration;
+    private HashSet<String> likes;
 
-    public int generateId() {
+    public static int generateId() {
         return ++countId;
     }
+
 }

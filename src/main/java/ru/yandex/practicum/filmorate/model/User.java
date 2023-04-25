@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.*;
 
 @Data
 @Builder
@@ -20,8 +21,10 @@ public class User {
     private String name;
     @Past(message = "Birthday not valid")
     private LocalDate birthday;
+    private HashSet<String> friends;
 
     public static int generateId() {
         return ++countId;
     }
+
 }
