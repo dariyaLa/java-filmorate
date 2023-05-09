@@ -16,7 +16,7 @@ public interface UserService {
 
     User putUser(User user);
 
-    Optional<User> getUser(int user);
+    Optional<User> getUser(int id);
 
     Collection<User> findCommonFriend(int id, int otherId);
 

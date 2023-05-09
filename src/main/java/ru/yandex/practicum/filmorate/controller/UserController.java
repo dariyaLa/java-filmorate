@@ -43,7 +43,7 @@ public class UserController {
     public User putUser(@RequestBody User user) {
         log.info("Получен PUT запрос к эндпоинту: /users, Строка параметров запроса: '{}'",
                 user);
-        if (userService.putUser(user) == null) {
+        if (userService.getUser(user.getId()).isEmpty()) {
             throw new ExceptionNotFound("Не найден User c id " + user.getId());
         }
         return userService.putUser(user);

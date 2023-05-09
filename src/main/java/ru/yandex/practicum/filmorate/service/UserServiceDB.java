@@ -15,7 +15,7 @@ import java.util.Optional;
 @Qualifier("userServiceDB")
 public class UserServiceDB implements UserService {
 
-    private UserDbStorage userStorage;
+    private final UserDbStorage userStorage;
 
     public UserServiceDB(UserDbStorage userStorage) {
         this.userStorage = userStorage;
