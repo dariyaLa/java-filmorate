@@ -44,7 +44,6 @@ class UserIntegrationTest {
         assertThat(controller).isNotNull();
     }
 
-
     @Test
     public void testFindUserByIdTest() {
 
@@ -60,14 +59,12 @@ class UserIntegrationTest {
     public void init() {
         String sql = "insert into users (id,username,login,email,birthday) " +
                 "values (1,'username','userlogin','useremail','1980-08-20')";
-        jdbcTemplate.update
-                (sql);
+        jdbcTemplate.update(sql);
     }
 
     @AfterEach
     public void clean() {
         String sql = "delete from users";
-        jdbcTemplate.update
-                (sql);
+        jdbcTemplate.update(sql);
     }
 }

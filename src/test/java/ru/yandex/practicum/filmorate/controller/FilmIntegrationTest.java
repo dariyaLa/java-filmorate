@@ -52,15 +52,13 @@ class FilmIntegrationTest {
     public void init() {
         String sql = "insert into films (id,name,description,releaseDate,duration,mpa_id) " +
                 "values (1,'filmname','filmdescription','2023-01-23',100,1)";
-        jdbcTemplate.update
-                (sql);
+        jdbcTemplate.update(sql);
     }
 
     @AfterEach
     public void clean() {
         String sql = "delete from films";
-        jdbcTemplate.update
-                (sql);
+        jdbcTemplate.update(sql);
     }
 
 }
