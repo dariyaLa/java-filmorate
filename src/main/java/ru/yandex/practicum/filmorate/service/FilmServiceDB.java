@@ -61,8 +61,7 @@ public class FilmServiceDB implements FilmService {
     @Override
     public void addLike(int idFilm, int idUser) {
         String sql = "insert into likes_film (film_id,user_id) values (?,?)";
-        filmStorage.getJdbcTemplate().update
-                (sql,
+        filmStorage.getJdbcTemplate().update(sql,
                         idFilm,
                         idUser
                 );
@@ -76,8 +75,7 @@ public class FilmServiceDB implements FilmService {
             throw new ExceptionNotFound("Не найдена запись с User id = " + userId + " и с Film id = " + filmId);
         } else {
             String sqlDelete = "delete from likes_film where film_id=? and user_id=?";
-            filmStorage.getJdbcTemplate().update
-                    (sqlDelete,
+            filmStorage.getJdbcTemplate().update(sqlDelete,
                             filmId,
                             userId
                     );

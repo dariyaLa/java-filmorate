@@ -35,8 +35,7 @@ public class UserServiceDB implements UserService {
 
     public void addFriend(int idUser, int idFriendUser) {
         String sql = "insert into follows (following_user_id,followed_user_id,status) values (?,?,?)";
-        userStorage.getJdbcTemplate().update
-                (sql,
+        userStorage.getJdbcTemplate().update(sql,
                         idUser,
                         idFriendUser,
                         false
