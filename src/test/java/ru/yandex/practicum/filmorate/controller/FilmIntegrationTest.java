@@ -28,7 +28,7 @@ class FilmIntegrationTest {
     @Autowired
     private final JdbcTemplate jdbcTemplate;
 
-    @Value(value="${local.server.port}")
+    @Value(value = "${local.server.port}")
     private int port;
 
     @Autowired
@@ -49,7 +49,7 @@ class FilmIntegrationTest {
     }
 
     @BeforeEach
-    public void init(){
+    public void init() {
         String sql = "insert into films (id,name,description,releaseDate,duration,mpa_id) " +
                 "values (1,'filmname','filmdescription','2023-01-23',100,1)";
         jdbcTemplate.update
@@ -57,7 +57,7 @@ class FilmIntegrationTest {
     }
 
     @AfterEach
-    public void clean(){
+    public void clean() {
         String sql = "delete from films";
         jdbcTemplate.update
                 (sql);
