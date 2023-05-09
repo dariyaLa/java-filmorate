@@ -66,8 +66,7 @@ public class UserDbStorage implements UserStorage {
         id = userRows.getInt("id") + 1;
         checkName(user); //редактируем name, если оно пустое
         String sql = "insert into users (id,username,login,email,birthday) values (?,?,?,?,?)";
-        jdbcTemplate.update
-                (sql,
+        jdbcTemplate.update(sql,
                         id,
                         user.getName(),
                         user.getLogin(),

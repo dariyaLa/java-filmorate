@@ -46,8 +46,7 @@ public class FilmDbStorage implements FilmStorage {
         filmRows.next();
         id = filmRows.getInt("id") + 1;
         String sql = "insert into films (id,name,description,releaseDate,duration,mpa_id) values (?,?,?,?,?,?)";
-        jdbcTemplate.update
-                (sql,
+        jdbcTemplate.update(sql,
                         id,
                         film.getName(),
                         film.getDescription(),
@@ -78,8 +77,7 @@ public class FilmDbStorage implements FilmStorage {
         String sql = "select * from mpa";
         SqlRowSet rows = jdbcTemplate.queryForRowSet(sql);
         while (rows.next()) {
-            mpa.put(
-                    rows.getInt("mpa_id"),
+            mpa.put(rows.getInt("mpa_id"),
                     new Mpa(rows.getInt("mpa_id"), rows.getString("rating"))
             );
         }
@@ -91,8 +89,7 @@ public class FilmDbStorage implements FilmStorage {
         String sql = "select * from genres";
         SqlRowSet rows = jdbcTemplate.queryForRowSet(sql);
         while (rows.next()) {
-            genres.put(
-                    rows.getInt("id"),
+            genres.put(rows.getInt("id"),
                     new Genre(rows.getInt("id"), rows.getString("genre"))
             );
         }
@@ -108,22 +105,17 @@ public class FilmDbStorage implements FilmStorage {
         //если пустое множество - удаляем все
         if (genresId.isEmpty()) {
             String sql = "delete from films_genres where film_id=?";
-            jdbcTemplate.update
-                    (sql,
-                            film.getId());
+            jdbcTemplate.update(sql, film.getId());
         } else {
             String sqlDelete = "delete from films_genres where film_id=?";
-            jdbcTemplate.update
-                    (sqlDelete,
+            jdbcTemplate.update(sqlDelete,
                             film.getId());
             for (Integer i : genresId) {
                 if (getGenre(i) != null) {
                     String sql = "insert into films_genres (film_id,genre_id) values (?,?)";
-                    jdbcTemplate.update
-                            (sql,
+                    jdbcTemplate.update(sql,
                                     film.getId(),
-                                    i
-                            );
+                                    i);
                 }
             }
         }
