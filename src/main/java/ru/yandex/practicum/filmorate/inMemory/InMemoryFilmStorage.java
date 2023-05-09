@@ -6,7 +6,6 @@ import ru.yandex.practicum.filmorate.exeption.ExceptionNotFound;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.storage.FilmStorage;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,10 +30,5 @@ public class InMemoryFilmStorage implements FilmStorage {
         } else {
             throw new ExceptionNotFound(String.format("Не найден Film c id %s", film.getId()));
         }
-    }
-
-    @Override
-    public Collection<Film> findAll() {
-        return films.values();
     }
 }

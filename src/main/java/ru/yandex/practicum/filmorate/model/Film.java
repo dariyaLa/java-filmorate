@@ -1,14 +1,15 @@
 package ru.yandex.practicum.filmorate.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import ru.yandex.practicum.filmorate.validator.DataConstraint;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Data
 @Builder
@@ -27,10 +28,19 @@ public class Film {
     private LocalDate releaseDate;
     @Min(0)
     private long duration;
-    private HashSet<String> likes;
+    @Getter
+    private Mpa mpa;
+
+    private List<Genre> genres;
 
     public static int generateId() {
         return ++countId;
     }
 
+    public Collection<Genre> getGenres() {
+        if (genres == null) {
+            return new ArrayList<>();
+        }
+        return genres;
+    }
 }

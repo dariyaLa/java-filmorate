@@ -1,15 +1,16 @@
 package ru.yandex.practicum.filmorate.inMemory;
 
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.UserStorage;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 @Component
+@Qualifier("inMemoryUserStorage")
 public class InMemoryUserStorage implements UserStorage {
 
     @Getter
@@ -32,10 +33,5 @@ public class InMemoryUserStorage implements UserStorage {
             return user;
         }
         return null;
-    }
-
-    @Override
-    public Collection<User> findAll() {
-        return users.values();
     }
 }
