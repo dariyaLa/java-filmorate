@@ -4,10 +4,13 @@ import lombok.Getter;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.exeption.ExceptionNotFound;
 import ru.yandex.practicum.filmorate.model.Film;
+import ru.yandex.practicum.filmorate.model.Genre;
+import ru.yandex.practicum.filmorate.model.Mpa;
 import ru.yandex.practicum.filmorate.storage.FilmStorage;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Component
 public class InMemoryFilmStorage implements FilmStorage {
@@ -30,5 +33,20 @@ public class InMemoryFilmStorage implements FilmStorage {
         } else {
             throw new ExceptionNotFound(String.format("Не найден Film c id %s", film.getId()));
         }
+    }
+
+    @Override
+    public Map<Integer, Genre> getGenres() {
+        return null;
+    }
+
+    @Override
+    public Optional<Film> getFilm(int id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Map<Integer, Mpa> getMpa() {
+        return null;
     }
 }

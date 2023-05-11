@@ -1,6 +1,5 @@
 package ru.yandex.practicum.filmorate.service;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.exeption.ExceptionNotFound;
@@ -9,13 +8,12 @@ import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.Genre;
 import ru.yandex.practicum.filmorate.model.Mpa;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-@Service
-@Qualifier("filmServiceDB")
+@Service("filmServiceDB")
 public class FilmServiceDB implements FilmService {
 
     private final FilmDbStorage filmStorage;
@@ -51,10 +49,10 @@ public class FilmServiceDB implements FilmService {
         filmRows.next();
         int id = filmRows.getInt("max(film_id)");
         if (id != 0) {
-            String sqlGetFilm = "select * from films where id=?";
-            filmRows = filmStorage.getJdbcTemplate().queryForRowSet(sqlGetFilm, filmRows.getInt("max(film_id)"));
-            return filmStorage.filmsBuilderMap(filmRows).values().stream().limit(count).collect(Collectors.toList());
-        }
+            Collection<Film> popularFilm = new ArrayList<>();
+            popularFilm.add(getFilm(id).get());
+            return popularFilm;
+      }
         return filmStorage.getFilms().values();
     }
 

@@ -2,7 +2,6 @@ package ru.yandex.practicum.filmorate.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.yandex.practicum.filmorate.exeption.ExceptionNotFound;
 import ru.yandex.practicum.filmorate.inMemory.InMemoryFilmStorage;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.Genre;
@@ -15,20 +14,10 @@ import java.util.Optional;
 @Service
 public class FilmServiceMemory implements FilmService {
 
-    InMemoryFilmStorage inMemoryFilmStorage = new InMemoryFilmStorage();
-    UserServiceMemory userService;
-
     @Autowired
-    public FilmServiceMemory(UserServiceMemory userService) {
-        this.userService = userService;
-    }
-
-    public Film findFilm(int id) {
-        if (inMemoryFilmStorage.getFilms().get(id) == null) {
-            throw new ExceptionNotFound("Не найден Film c id " + id);
-        }
-        return inMemoryFilmStorage.getFilms().get(id);
-    }
+    private UserServiceMemory userService;
+    @Autowired
+    private InMemoryFilmStorage inMemoryFilmStorage;
 
     @Override
     public Map<Integer, Film> getFilms() {
@@ -75,15 +64,13 @@ public class FilmServiceMemory implements FilmService {
         return null;
     }
 
+    @Override
     public Film createFilm(Film film) {
         return inMemoryFilmStorage.createFilm(film);
     }
 
+    @Override
     public Film putFilm(Film film) {
         return inMemoryFilmStorage.putFilm(film);
-    }
-
-    public Collection<Film> findAll() {
-        return inMemoryFilmStorage.getFilms().values();
     }
 }

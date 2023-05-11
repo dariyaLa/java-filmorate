@@ -15,8 +15,7 @@ import java.util.Optional;
 @Slf4j
 @RestController
 public class UserController {
-    @Autowired
-    @Qualifier("userServiceDB")
+
     private final UserService userService;
 
     @Autowired

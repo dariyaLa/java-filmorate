@@ -8,6 +8,7 @@ import ru.yandex.practicum.filmorate.storage.UserStorage;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Component
 @Qualifier("inMemoryUserStorage")
@@ -33,5 +34,10 @@ public class InMemoryUserStorage implements UserStorage {
             return user;
         }
         return null;
+    }
+
+    @Override
+    public Optional<User> getUser(int id) {
+        return Optional.empty();
     }
 }

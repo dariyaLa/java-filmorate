@@ -1,7 +1,6 @@
 package ru.yandex.practicum.filmorate.impl;
 
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -14,8 +13,7 @@ import ru.yandex.practicum.filmorate.storage.FilmStorage;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Component
-@Qualifier("filmDBStorage")
+@Component("filmDBStorage")
 public class FilmDbStorage implements FilmStorage {
 
     @Getter
@@ -32,6 +30,7 @@ public class FilmDbStorage implements FilmStorage {
         return filmsBuilderMap(filmRows);
     }
 
+    @Override
     public Optional<Film> getFilm(int id) {
         String sql = "select * from films where id=?";
         SqlRowSet filmRows = jdbcTemplate.queryForRowSet(sql, id);
@@ -72,7 +71,8 @@ public class FilmDbStorage implements FilmStorage {
         return getFilm(film.getId()).get();
     }
 
-    public Map<Integer, Mpa> getMpa() {
+    @Override
+     public Map<Integer, Mpa> getMpa() {
         Map<Integer, Mpa> mpa = new HashMap<>();
         String sql = "select * from mpa";
         SqlRowSet rows = jdbcTemplate.queryForRowSet(sql);
@@ -84,6 +84,7 @@ public class FilmDbStorage implements FilmStorage {
         return mpa;
     }
 
+    @Override
     public Map<Integer, Genre> getGenres() {
         Map<Integer, Genre> genres = new HashMap<>();
         String sql = "select * from genres";
@@ -97,7 +98,7 @@ public class FilmDbStorage implements FilmStorage {
     }
 
     //обновляем жанр для фильма
-    public void putGenreFilm(Film film) {
+    private void putGenreFilm(Film film) {
         Collection<Integer> genresId = film.getGenres().stream()
                 .map(Genre::getId)
                 .distinct()
@@ -121,7 +122,7 @@ public class FilmDbStorage implements FilmStorage {
         }
     }
 
-    public List<Genre> getGenresForFilms(Optional<Film> film) {
+    private List<Genre> getGenresForFilms(Optional<Film> film) {
         Map<Integer, Genre> genres = getGenres();
         List<Genre> genresFilm = new ArrayList<>();
         String sql = "select * from films_genres where film_id=?";
@@ -132,7 +133,7 @@ public class FilmDbStorage implements FilmStorage {
         return genresFilm;
     }
 
-    public Mpa getMpaId(int mpaId) {
+    private Mpa getMpaId(int mpaId) {
         String sql = "select * from mpa where mpa_id=?";
         SqlRowSet rows = getJdbcTemplate().queryForRowSet(sql, mpaId);
         if (!rows.next()) {
@@ -141,7 +142,7 @@ public class FilmDbStorage implements FilmStorage {
         return new Mpa(rows.getInt("mpa_id"), rows.getString("rating"));
     }
 
-    public Genre getGenre(int genreId) {
+    private Genre getGenre(int genreId) {
         String sql = "select * from genres where id=?";
         SqlRowSet rows = getJdbcTemplate().queryForRowSet(sql, genreId);
         if (!rows.next()) {
@@ -151,7 +152,7 @@ public class FilmDbStorage implements FilmStorage {
     }
 
 
-    public Optional<Film> filmBuilder(SqlRowSet rows) {
+    private Optional<Film> filmBuilder(SqlRowSet rows) {
         if (rows.next()) {
             Optional<Film> film = Optional.ofNullable(Film.builder()
                     .id(rows.getInt("id"))
@@ -167,7 +168,7 @@ public class FilmDbStorage implements FilmStorage {
         return Optional.empty();
     }
 
-    public Map<Integer, Film> filmsBuilderMap(SqlRowSet rows) {
+    private Map<Integer, Film> filmsBuilderMap(SqlRowSet rows) {
         Map<Integer, Film> films = new HashMap<>();
         Film film;
         while (rows.next()) {

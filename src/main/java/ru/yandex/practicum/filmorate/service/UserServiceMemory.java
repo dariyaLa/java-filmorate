@@ -1,6 +1,6 @@
 package ru.yandex.practicum.filmorate.service;
 
-import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.inMemory.InMemoryUserStorage;
@@ -13,10 +13,11 @@ import java.util.stream.Collectors;
 @Qualifier("userServiceMemory")
 public class UserServiceMemory implements UserService {
 
-    @Getter
-    InMemoryUserStorage inMemoryUserStorage = new InMemoryUserStorage();
+    @Autowired
+    private InMemoryUserStorage inMemoryUserStorage;
 
     //добавление в друзья
+    @Override
     public void addFriend(int idUser, int idFriendUser) {
         Map<Integer, User> users = inMemoryUserStorage.getUsers();
 
@@ -43,6 +44,7 @@ public class UserServiceMemory implements UserService {
         }
     }
 
+    @Override
     public void deleteFriend(int idUser, int idFriendUser) {
         Map<Integer, User> users = inMemoryUserStorage.getUsers();
 
@@ -63,6 +65,7 @@ public class UserServiceMemory implements UserService {
         }
     }
 
+    @Override
     public List<User> findFriend(int idUser) {
         Map<Integer, User> users = inMemoryUserStorage.getUsers();
         List<String> listFriends = new ArrayList<>(inMemoryUserStorage.getUsers().get(idUser).getFriends());
@@ -72,6 +75,7 @@ public class UserServiceMemory implements UserService {
 
     }
 
+    @Override
     public List<User> findCommonFriend(int idUser, int idFriendUser) {
         Map<Integer, User> users = inMemoryUserStorage.getUsers();
         if (users.containsKey(idUser) &&
@@ -90,18 +94,17 @@ public class UserServiceMemory implements UserService {
         return new ArrayList<>();
     }
 
-    public User findUser(int id) {
-        return inMemoryUserStorage.getUsers().get(id);
-    }
-
+    @Override
     public Map<Integer, User> getUsers() {
         return inMemoryUserStorage.getUsers();
     }
 
+    @Override
     public User createUser(User user) {
         return inMemoryUserStorage.createUser(user);
     }
 
+    @Override
     public User putUser(User user) {
         return inMemoryUserStorage.putUser(user);
     }

@@ -1,7 +1,6 @@
 package ru.yandex.practicum.filmorate.impl;
 
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -12,8 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@Component
-@Qualifier("userDBStorage")
+@Component("userDBStorage")
 public class UserDbStorage implements UserStorage {
 
     @Getter
@@ -42,6 +40,7 @@ public class UserDbStorage implements UserStorage {
         return users;
     }
 
+    @Override
     public Optional<User> getUser(int id) {
         String sql = "select * from users where id=?";
         SqlRowSet userRows = jdbcTemplate.queryForRowSet(sql, id);
@@ -89,7 +88,7 @@ public class UserDbStorage implements UserStorage {
         return getUser(user.getId()).get();
     }
 
-    public void checkName(User user) {
+    private void checkName(User user) {
         if (user.getName().equals("")) {
             user.setName(user.getLogin());
         }

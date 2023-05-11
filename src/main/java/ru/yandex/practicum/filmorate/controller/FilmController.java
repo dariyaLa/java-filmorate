@@ -19,10 +19,8 @@ import java.util.Optional;
 @RestController
 public class FilmController {
 
-    @Qualifier("filmServiceDB")
     private final FilmService filmService;
 
-    @Qualifier("userServiceDB")
     private final UserService userService;
 
     @Autowired
